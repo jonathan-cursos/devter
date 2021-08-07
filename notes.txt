@@ -1,0 +1,32 @@
+¿Porque vale la pena?
+  1.Facilidad para pre-rendering: Esto significa que antes de llegar al cliente, ya
+    la aplicación se está renderizando. Una de las soluciones que da Next para esto es
+    SSR (renderizar en el servidor). En caso de que el navegador cliente no tenga 
+    activado JS, al menos se podrá ver la app (aunque no funcionen ciertas cosas).
+  2.La hace isomorfica, es decir, que puede correr tanto en servidor como en cliente.
+  3.No se debe configurar.
+  4.Los sitios son rapidos, por tener el html ya precargado en el servidor.
+  5.Puede compilar a archivos estaticos si lo necesitamos, como con webpack, en caso
+    de necesitar los archivos.
+  6.Tiene incorporado css-in-js con una librería llamada Style-jsx.
+  7-Se puede crear las rutas de una API y la API misma (backend).
+    .Se pueden usar middlewares, Graphql, etc.
+  8-Al desplegar con vercel, ya viene optimizado para eso (Vercel lo creo).
+  9-Next Head para SEO.
+  10-Soporte a typescrypt.
+  11-Sirve facilmente archivos estaticos.
+  12-Soporta variables de entorno, no solo en el servidor, tambien en el navegador.
+
+No se pierde el SPA:
+  -Lo que hace es que la primer ruta (index) la renderiza en el servidor.
+  -Despues de ahí, cualquier navegación entre rutas se comporta como SPA, sin volver
+    a cargar todo el sitio.
+
+Diferencia al hacerlo con express:
+  -Tiene muchas optimizaciones que dificilmente se puedan hacer con express.
+  -Es más potente, por esto, más recomendado.
+
+-Es JAMstack pero no solo este stack (JavaScript, API, Markup).
+  .Markup es lo que se mencionó sobre páginas estaticas.
+
+-Code splitting automatico: Cada ruta la renderiza solo cuando lo necesitamos.
