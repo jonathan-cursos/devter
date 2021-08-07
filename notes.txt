@@ -1,32 +1,31 @@
-¿Porque vale la pena?
-  1.Facilidad para pre-rendering: Esto significa que antes de llegar al cliente, ya
-    la aplicación se está renderizando. Una de las soluciones que da Next para esto es
-    SSR (renderizar en el servidor). En caso de que el navegador cliente no tenga 
-    activado JS, al menos se podrá ver la app (aunque no funcionen ciertas cosas).
-  2.La hace isomorfica, es decir, que puede correr tanto en servidor como en cliente.
-  3.No se debe configurar.
-  4.Los sitios son rapidos, por tener el html ya precargado en el servidor.
-  5.Puede compilar a archivos estaticos si lo necesitamos, como con webpack, en caso
-    de necesitar los archivos.
-  6.Tiene incorporado css-in-js con una librería llamada Style-jsx.
-  7-Se puede crear las rutas de una API y la API misma (backend).
-    .Se pueden usar middlewares, Graphql, etc.
-  8-Al desplegar con vercel, ya viene optimizado para eso (Vercel lo creo).
-  9-Next Head para SEO.
-  10-Soporte a typescrypt.
-  11-Sirve facilmente archivos estaticos.
-  12-Soporta variables de entorno, no solo en el servidor, tambien en el navegador.
+Comienzo
 
-No se pierde el SPA:
-  -Lo que hace es que la primer ruta (index) la renderiza en el servidor.
-  -Despues de ahí, cualquier navegación entre rutas se comporta como SPA, sin volver
-    a cargar todo el sitio.
+-Para usarlo, corremos el comando: npx create-next-app [nombre-app].
+-Esto nos genera un proyecto completo.
 
-Diferencia al hacerlo con express:
-  -Tiene muchas optimizaciones que dificilmente se puedan hacer con express.
-  -Es más potente, por esto, más recomendado.
+-Automaticamente vienen los script start, dev y build.
 
--Es JAMstack pero no solo este stack (JavaScript, API, Markup).
-  .Markup es lo que se mencionó sobre páginas estaticas.
+Cosas importantes que se crearon:
+  -pages/api: Un ejemplo de las rutas que tendrá la API y sus endpoints.
+  -pages/index.js: Core de nuestra app, la ruta principal.
+  -public: Subiremos imagenes, estaticos, y lo que sea público.
 
--Code splitting automatico: Cada ruta la renderiza solo cuando lo necesitamos.
+-Al correr dev, nos crea una carpeta con estaticos, .next.
+
+Styled JSX
+  -Lo que haremos será, dentro de la etiqueta que encapsula todo el
+    componente, colocamos una etiqueta <style jsx> la cual, tendrá
+    por dentro unas comillas invertidas (para casos donde haya que
+    usar variables).
+  -Dentro de esa comilla se colocarán los estilos que podrían ir en
+    el css.
+  -Esto tiene una particularidad, que al usar un selector de 
+    elemento, por ejemplo h1, sí hubiera h1 en otras páginas, esos
+    estilos no se aplican a esas páginas.
+  -Esto porque al agregar estilos de esta forma, lo que hace es crear
+    una clase especifica para ese componente.
+  -Recordar que las comillas deben ir dentro de {}.
+  -Tambien se pueden usar className, lo cual es bueno hacerlo.
+  -Estilos globales: Para ello, creamos una etiqueta similar,
+    pero con la prop 'global'. 
+  -Podemos tener varias en el mismo componente.
