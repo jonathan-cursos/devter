@@ -1,14 +1,27 @@
-Problema con estilos
-  -Sí tenemos un estilo global en un componente, estos estilos se aplicarán solo
-    sí el componente está en el DOM, aunque sean globales.
-  -Para cargar siempre todos los estilos globales existe el Custo App.
+getInitialProps
 
-Custom App:
-  -Automaticamente en las páginas vendría un archivo _app.js.
-  -A este se le agrega la etiqueta style con los archivos globales.
-  -El problema es que cualquier cambio que se haga a ese archivo, para que se
-    vea reflejados hay que reiniciar el servidor.
+-Vamos a ver el uso de getInitialProps, pero esta deprecated.
+-Ahora se usa getStaticProps y getServerSiteProps.
+-Para usarlo, fuera del componente, le damos como valor al elemento getInitialProps
+  del componente una función.
+-Esta retornará un objeto, y cada elemento será cada prop que tendrá ahora el 
+  componente, y podrá usar.
+-El getInitialProps funciona porque el componente no se renderiza hasta que todo
+  el metodo se haya terminado, sí es asincrono, igual espera a que termine para
+  renderizar.
+-Aquí dentro podemos hacer fetch de datos, y los traídos pasarlos a esas props.
+-Solo funciona en páginas, no en componentes.
 
-Con layout:
-  -Sí agremos los estilos globales a un layout se aplicarán siempre para todo
-    donde esté ese layout.
+getInitialProps en servidor y cliente:
+  -getInitialProps se ejecuta en servidor, pero tambien en el cliente.
+  -Cuando ingresamos a una ruta directamente que tenga getInitialProps, se ejecuta
+    en el servidor, pero sí estamos en otra página, y luego ingresamos a esa, lo
+    ejecutará en el cliente.
+
+Introducción a api interna:
+  -Para hacer una petición a la API, tenemos que colocar todo el localhost...
+  -Esto porque la API corre por aparte, aunque sea en el mismo puerto.
+  -El archivo que tenemos dentro de la carpeta api se llama hello.js, por lo que
+    la ruta hacia esa api sería 'api/hello'
+  -Las api creadas aquí son un poco más limitadas que express, pero son similares,
+    casí que en el 90% esta nos será suficiente.
