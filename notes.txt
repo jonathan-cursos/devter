@@ -1,1 +1,14 @@
-[quedamos minuto 46:22]
+Problema con estilos
+  -Sí tenemos un estilo global en un componente, estos estilos se aplicarán solo
+    sí el componente está en el DOM, aunque sean globales.
+  -Para cargar siempre todos los estilos globales existe el Custo App.
+
+Custom App:
+  -Automaticamente en las páginas vendría un archivo _app.js.
+  -A este se le agrega la etiqueta style con los archivos globales.
+  -El problema es que cualquier cambio que se haga a ese archivo, para que se
+    vea reflejados hay que reiniciar el servidor.
+
+Con layout:
+  -Sí agremos los estilos globales a un layout se aplicarán siempre para todo
+    donde esté ese layout.
