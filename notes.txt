@@ -1,14 +1,1 @@
-Estilos al SVG
-
--Como estamos viendo, en el componente de boton estamos agregando un 
-  children.
--Dentro de la página index estamos dando a ese children un svg.
--Sí dentro del componente de boton le damos estilos al svg, no se verán
-  aplicados, ya que ese svg está siendo colocado en un scope distinto,
-  por eso los estilos no le llegan.
--Una solucion es que dentro de los estilos del boton, coloquemos:
-  button > :global(svg){styles}.
--Esto hará que los estilos se agreguen a todos los svg que sean hijos
-  directos del button, pero en un scope global.
--No es necesario colocar '>', pero lo hacemos para limitar la busqueda a 
-  solo los hijos directos.
+[quedamos minuto 1:31:25 y falta toda la explicación de firebase]

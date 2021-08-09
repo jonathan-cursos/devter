@@ -1,10 +1,22 @@
 import Head from "next/head";
+import { useState } from "react";
 import AppLayout from "../components/AppLayout";
 import Button from "../components/AppLayout/Button";
 import GitHub from "../components/Icons/GitHub";
 import { colors } from "../styles/theme";
 
+import { loginWithGitHub } from "../firebase/client";
+
 export default function Home() {
+  const [user, setUser] = useState(null);
+  const handleClick = () => {
+    loginWithGitHub()
+      .then((user) => {
+        const { avatar, username, url } = user;
+        setUser(user);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <>
       <Head>
@@ -23,10 +35,12 @@ export default function Home() {
             with developers
           </h2>
           <div>
-            <Button>
-              <GitHub width={24} height={24} fill={"#fff"} />
-              Login with GitHub
-            </Button>
+            {user === null && (
+              <Button onClick={handleClick}>
+                <GitHub width={24} height={24} fill={"#fff"} />
+                Login with GitHub
+              </Button>
+            )}
           </div>
         </section>
       </AppLayout>
@@ -44,13 +58,13 @@ export default function Home() {
         }
 
         h1 {
-          color: ${colors.primary};
           font-weight: 600;
           margin-bottom: 16px;
+          color: ${colors.secondary};
         }
 
         h2 {
-          color: ${colors.secondary};
+          color: ${colors.primary};
           font-size: 21px;
           margin: 0;
         }
