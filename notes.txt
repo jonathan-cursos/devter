@@ -1,17 +1,25 @@
-Utilidad para opacidad
+Breakpoints y extraer estilos
 
--Resulta que en css, al colocar un color en hexadecimal, cada 2 digitos
-  son RGBA, pues sí a esos le agregamos otros 2, será la opacidad.
--Entonces, estamos creando una utilidad para pasar del numero entre 0 y 1
-  de la opacidad a hexadecimal.
--Para hello, el decimal pasado, lo redondeamos con Math.round().
--Este metodo redondea el número del param. hacia el entero más cercano.
--En nuestro caso será la opacidad * el total de un color de rgb, que sería
-  255.
--Para pasar eso a hexadecimal usamos toString(), pero le pasamos como 
-  parametro un 16.
--Al pasar un paremtro, este convierte el valor en un string, pero 
-  transformado según se indique en ese parametro.
+Breakpoints - Mediaqueries:
+  -Style-jsx no deja de ser css, por lo que podemos colocar breakpoints.
+  -Sencillamente el breakpoint se coloca dentro de las etiquetas Style
+    como se haría en cualquier css.
+  -El detalle está en que sí en el archivo que teniamos estilos colocamos
+    un objeto con diferentes breakpoint, donde el key sea un nombre, y
+    el value el valor del breakpoint, este lo podemos colocar dentro de
+    el () del breakpoint, según sea el caso.
 
--Esto no es obligado hacerlo así, pero estamos probando las utilidades 
-  que nos dá los estilos en JSX.
+Extraer estilos:
+  -Los estilos no se ven bien en el mismo componente, por lo que los
+    vamos a extraer.
+  -Vamos a tener cada componente dentro de una carpeta, y el index será
+    el componente.
+  -Tendremos otro archivo, que serán los estilos.
+  -Ahí importamos 'styled-jsx/css', que viene preinstalado.
+  -Por defecto exportamos esto, seguido inmediatamente de unos template
+    string, que dentro traerán los estilos (como en styled-components).
+  -Sí vamos a hacerlo con los globales, no exportamos por defdecto, sino
+    normal, y en lugar de la librería, un elemento de ella, llamado 
+    'global'.
+  -Para colocarlos en el index, colocamos igual las style, pero como
+    contenido, colocamos estas variables exportadas.
