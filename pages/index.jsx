@@ -12,34 +12,10 @@ export default function Home() {
       </Head>
 
       <AppLayout>
-        <Link href="/">
-          <a>
-            <h1>Devter</h1>
-          </a>
-        </Link>
-        <nav>
-          <Link href="/timeline">
-            <a>timeline</a>
-          </Link>
-        </nav>
+        <h1>Devter</h1>
       </AppLayout>
 
-      <style jsx>{`
-        h1 {
-          text-align: center;
-          font-size: 48px;
-        }
-
-        nav {
-          font-size: 24px;
-          text-align: center;
-        }
-
-        a {
-          color: #09f;
-          text-decoration: none;
-        }
-      `}</style>
+      <style jsx>{``}</style>
     </>
   );
 }

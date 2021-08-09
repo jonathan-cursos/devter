@@ -1,27 +1,8 @@
-getInitialProps
+Estilos en su archivo
 
--Vamos a ver el uso de getInitialProps, pero esta deprecated.
--Ahora se usa getStaticProps y getServerSiteProps.
--Para usarlo, fuera del componente, le damos como valor al elemento getInitialProps
-  del componente una función.
--Esta retornará un objeto, y cada elemento será cada prop que tendrá ahora el 
-  componente, y podrá usar.
--El getInitialProps funciona porque el componente no se renderiza hasta que todo
-  el metodo se haya terminado, sí es asincrono, igual espera a que termine para
-  renderizar.
--Aquí dentro podemos hacer fetch de datos, y los traídos pasarlos a esas props.
--Solo funciona en páginas, no en componentes.
-
-getInitialProps en servidor y cliente:
-  -getInitialProps se ejecuta en servidor, pero tambien en el cliente.
-  -Cuando ingresamos a una ruta directamente que tenga getInitialProps, se ejecuta
-    en el servidor, pero sí estamos en otra página, y luego ingresamos a esa, lo
-    ejecutará en el cliente.
-
-Introducción a api interna:
-  -Para hacer una petición a la API, tenemos que colocar todo el localhost...
-  -Esto porque la API corre por aparte, aunque sea en el mismo puerto.
-  -El archivo que tenemos dentro de la carpeta api se llama hello.js, por lo que
-    la ruta hacia esa api sería 'api/hello'
-  -Las api creadas aquí son un poco más limitadas que express, pero son similares,
-    casí que en el 90% esta nos será suficiente.
+-Para la creación de estilos, lo que haremos será crear una carpeta donde
+  colocaremos distintos valores a propiedades css que podrían haber.
+-Dentro de cada archivo exportamos cosas como objetos, en donde coloquemos
+  diferentes valores css a cada key.
+-De esta forma, en los estilos, al dar valores, podemos traerlos de esos
+  objetos, y colocarlos porque estamos usando los template strings
