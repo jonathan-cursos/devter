@@ -1,8 +1,17 @@
-Estilos en su archivo
+Utilidad para opacidad
 
--Para la creación de estilos, lo que haremos será crear una carpeta donde
-  colocaremos distintos valores a propiedades css que podrían haber.
--Dentro de cada archivo exportamos cosas como objetos, en donde coloquemos
-  diferentes valores css a cada key.
--De esta forma, en los estilos, al dar valores, podemos traerlos de esos
-  objetos, y colocarlos porque estamos usando los template strings
+-Resulta que en css, al colocar un color en hexadecimal, cada 2 digitos
+  son RGBA, pues sí a esos le agregamos otros 2, será la opacidad.
+-Entonces, estamos creando una utilidad para pasar del numero entre 0 y 1
+  de la opacidad a hexadecimal.
+-Para hello, el decimal pasado, lo redondeamos con Math.round().
+-Este metodo redondea el número del param. hacia el entero más cercano.
+-En nuestro caso será la opacidad * el total de un color de rgb, que sería
+  255.
+-Para pasar eso a hexadecimal usamos toString(), pero le pasamos como 
+  parametro un 16.
+-Al pasar un paremtro, este convierte el valor en un string, pero 
+  transformado según se indique en ese parametro.
+
+-Esto no es obligado hacerlo así, pero estamos probando las utilidades 
+  que nos dá los estilos en JSX.
