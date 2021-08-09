@@ -19,6 +19,10 @@ export default function Button({ children, onClick }) {
           transition: opacity 0.3s ease;
         }
 
+        button > :global(svg) {
+          margin-right: 8px;
+        }
+
         button:hover {
           opacity: 0.7;
         }
