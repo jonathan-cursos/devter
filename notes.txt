@@ -1,1 +1,20 @@
-[quedamos minuto 1:31:25 y falta toda la explicación de firebase]
+Configurar app de firebase
+
+-Ir a consola y crear un proyecto > Ir a autenticación > Metodos > Editar > 
+  Habilitar.
+-Esto nos pedirá un ID de cliente y un secret, que lo conseguiremos desde GH:
+  -Settings > Developer settings > Oauth Apps > New.
+  -Colocamos nombre, url, descripción, y el callback lo conseguimos de la pestaña
+    de firebase que dejamos abierta, en la parte de abajo del secret.
+  -Esto nos dá un clientId y secret.
+-Nos devolvemos al dashboard (donde están todos nuestros proyectos), entramos
+  al que creamos, y nos mostrara opciones para añadir Firebase a nuestra app, 
+  escogemos Web.
+-Eso nos dá un formulario:
+  .Colocamos nombre, pero no activamos la casilla de firebase hosting.
+  .No hacemos caso al codigo, damos click en Ir a consola.
+-Ahora no nos muestra los botones, solo la opción web recien creada, damos click y
+  click en configuración.
+-En 'Firebase SDK snippet' > Click en configuración.
+-Copiaremos el codigo y lo pegaremos en el archivo index de una carpeta firebase en
+  la raíz.
