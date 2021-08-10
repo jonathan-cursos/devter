@@ -8,7 +8,7 @@ import { colors } from "../styles/theme";
 import { loginWithGitHub, onAuthStateChanged } from "../firebase/client";
 
 export default function Home() {
-  const [user, setUser] = useState(undefined);
+  const [user, setUser] = useState(null);
   const handleClick = () => {
     loginWithGitHub()
       .then((user) => {
