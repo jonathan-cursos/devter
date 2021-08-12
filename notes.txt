@@ -39,3 +39,11 @@ Comandos:
   limpio:
     .'react/prop-types': 'off',
     .'react/react-in-jsx-scope': 'off'
+
+-Tambien hay muchas estrategias para que antes de hacer un commit, se aplique 
+  prettier y eslint (en ese orden), nosotros usaremos lint-staged.
+-Para instalarlo: npx mrm lint-staged
+-Esto nos realizará unos cambios en el package para aplicar esa estrategia.
+-Para esto, hay que tener dos dependencias instaladas en el proyecto, prettier y 
+  eslint-config-prettier. Y en eslint, colocar como ultimo elemento en extends,
+  'prettier'.
