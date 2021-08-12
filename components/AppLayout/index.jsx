@@ -1,4 +1,5 @@
-import styles, { global } from "./styles";
+import styles, { global } from './styles'
+
 const AppLayout = ({ children }) => {
   return (
     <>
@@ -11,7 +12,7 @@ const AppLayout = ({ children }) => {
       </style>
       ;
     </>
-  );
-};
+  )
+}
 
-export default AppLayout;
+export default AppLayout

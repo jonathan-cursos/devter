@@ -1,54 +1,41 @@
-Configuraciónde firbase/index.js y login
+Añadir eslint
 
--Esta clase se divide en 2 partes, hacer login y mantener la sesión activa.
--Para mantener la sesion activase le realizan ciertos cambios al código al hacer
-  login.
--Exportaremos al final 2 funciones, una para login y otra para mantener la sesión.
--Debemos instalar firebase en el proyecto.
+-Todas las dependencias relacionadas son de desarrollo.
+-Al usar create-next-app nos crea un archivo eslint, lo eliminamos.
+-Instalamos eslint.
+-Corremos el comando 'npx eslint --init', colocaremos la configuración:
+  ...like to use?: Ver sintaxis, problemas y forzar estilo.
+  ...type of modules? Según sea el caso, en el nuesto import/export.
+  ...framework: Según el caso.
+  ...typescript: Según el caso.
+  ...where the code run: Ambas en nuestro caso, para ello presionamos 'a'. Sí solo
+    ocupamos una, con space.
+  ...style for project: popular (gusto del profesor).
+  ...style guide: Standar (gusto del profesor).
+  ...format config file: JS.
+  ...install dependences with npm: Le damos no, porque algunas versiones están
+    predefinidas, aun así nos creará el archivo.
+-Instalamos esas dependencias (eliminando la version que viene ahí, solo con el 
+  nombre).
 
-Inicio de sesion:
-  -Importamos firebase. Todo metodo o elemento usado de firebase vendrá de su
-    elemento 'default'.
-  -Pegamos el objeto que habiamos copiado.
-  -Inicializamos el app de firebase con initializeApp(), por parametro la config, 
-    pero solo sí el length de .apps de firebase es 0.
-  -Exportamos un metodo que será el que realice el login:
-    .Creamos una instancia de auth.GitHubAuthProvider de firebase, sin params.
-    .Retornamos auth().signUpWithPopup(), y por parametro la clase creada.
-      -signUpWithPopup es que se creará una ventana aparte.
-      -Como vemos, auth puede ser un elemento o un metodo.
-  -Lo anterior retorna una promesa, por lo que ahi en el mismo return podemos sacar
-    la información del usuario que se logeo, que se encuentra en el elemento 
-    retornado por esa promesa en additionalUserInfo. En este podemos sacar el 
-    username (en displayName), la foto (en photoURL), y el email.
-  -Sí retornamos un objeto con ese elemento, podemos obtenerlo de forma asincrona 
-    en el boton de la interfaz al hacer click.
-  -De esa forma podemos guardarlo en el estado.
-  -Ahorá, la sesion no se está quedando guardada.
+-Es importante saber que es mala practica tener un formateador por defecto, por
+  lo que lo quitamos, debemos tener uno diferente por proyecto.
+-Eslnt nos va a formatear el codigo cuando corramos un comando que explicamos ahora,
+  pero debemos instalar su plugin.
 
-Mantener la session:
-  -La función tendrá un onChange por parametro. En nuestro caso, el valor que le
-    estamos dando a este es un setState del hook que tendrá la info. del usuario.
-  -Retornaremos auth().onAuthStateChanged() de firebase, que lleva una función.
-  -Esta por parametro tendrá la info. del usuario que retornaremos en el objeto
-    que mencionamos anteriormente (solo qharemos un cambio y ahora el objeto lo
-    retornaremos en otra función).
-  -Creamos una constante cuyo valor sea la info. mapeada de ese usario.
-  -La info la mapearemos con una funcion que ahora crearemos, pero le pasamos el
-    usuario como parametro.
-  -Ejecutamos el onChange y le pasamos la contante creada por parametro.
-  -La funcion que mapea el usuario recibirá este por parametro, y retornará un 
-    objeto con los datos deseados de ese usuario (email, foto, username, etc).
-  -Finalmente, la función de inicio de sesion lo unico que hará será retornar el
-    auth().signInWithPopup() con la instancia creada por parametro.
-  -La idea es que al hacer click en el boton, coloquemos en el estado los datos
-    que nos traerá del usuario., y en un useEffect, ejecutar la funcion de la 
-    sesion. El useEffect solo se ejecuta una vez.
-  -Esta asincronamente traerá los datos del usuario, por lo que los colocaremos En
-    el state.
+Comandos:
+  -npx eslint .: Nos informa los errores.
+  -npx eslint . --fix: Nos soluciona los errores que pueda.
+    .Este comando es el que colocaremos en el package, en el script "lint".
 
-Nota importante: Podemos notar que a veces en los .then() estamos ejecutando 
-  funciones que no tienen parametro ni parentesis, esto significa que el then esta
-  retornando esa función, y el parametro del then se le esta pasando por parametro
-  a la función que se está retornando.
-  .then(data => fnc(data)) === .then(fnc). Esto no siempre es así.
+-Ahora, el formateo no está siendo el esperado, por lo que creamos un archivo 
+  llamado .prettierrc y tendrá por ahorá la configuración del archivo que tenemos
+  ahí. Esta configuración se puede añadir al editor entero manualmente con ctrl+,
+   así no tener un archivo de configuración, que es lo recomendable.
+
+-Aun hay unos errores, pero están chocando con la utilidad de Next, como tener 
+  importado React, para ello, en .eslintrc, podemos sobreescribir reglas, en el
+  objeto vacío que está ahí, así que colocamos estas 2 para tener el código completo
+  limpio:
+    .'react/prop-types': 'off',
+    .'react/react-in-jsx-scope': 'off'
