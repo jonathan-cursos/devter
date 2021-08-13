@@ -1,12 +1,6 @@
-jsconfig.json
-
--Sí colocamos este archivo en la raíz del proyecto, podemos elegir cierta config.
-  especifica para nuestro proyecto.
--Por ejemplo, colocando el objeto "compilerOptions", y dentro un elemento
-  "baseUrl": ".", indicamos que todos los imports empiecen desde la raíz del
-  proyecto.
--Esto para mayor facilidad a la hora de importar si tenemos archivos que esten 
-  dentro de muchos niveles de carpetas, y necesiten algo que este en la raíz o
-  proximo.
--Ya no necesitariamos poner, por ejemplo, el ..
--Sí tenemos archivos en la misma carpeta, si podemos acceder con .
+Correccion de autenticación:
+  -Como en el index estamos diciendo que mostramos el boton de GH solo sí el valor
+    del usuario es null, pero el valor por defecto es undefined, solo mostrará el
+    boton sí hacemos una corrección en la función que mantiene activa la sessión.
+  -El cambio debe ser, que el valor de normalizedUser, sí no traemos un usuario,
+    sea null.

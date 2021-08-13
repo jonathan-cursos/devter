@@ -7,9 +7,10 @@ import { colors } from 'styles/theme'
 
 import { loginWithGitHub, onAuthStateChanged } from 'firebase/client'
 import Avatar from 'components/Avatar'
+import Logo from 'components/Icons/Logo'
 
 export default function Home() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(undefined)
   const handleClick = () => {
     loginWithGitHub()
       .then((user) => {
@@ -31,7 +32,7 @@ export default function Home() {
 
       <AppLayout>
         <section>
-          <img src='/devter-logo.png' alt='Logo' />
+          <Logo width='100' />
           <h1>Devter</h1>
           <h2>
             Talk about development
@@ -74,11 +75,12 @@ export default function Home() {
         h1 {
           font-weight: 600;
           margin-bottom: 16px;
-          color: ${colors.secondary};
+          font-size: 32px;
+          color: ${colors.primary};
         }
 
         h2 {
-          color: ${colors.primary};
+          color: ${colors.secondary};
           font-size: 21px;
           margin: 0;
         }

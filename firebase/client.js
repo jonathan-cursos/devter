@@ -26,15 +26,14 @@ const mapUserFromFirebaseAuthToUser = (user) => {
 }
 
 export const onAuthStateChanged = (onChange) => {
-  return firebase.default.auth().onAuthStateChanged(user => { // este user es el mismo que el de abajo
-    const normalizedUser = mapUserFromFirebaseAuthToUser(user)
+  return firebase.default.auth().onAuthStateChanged((user) => {
+    // este user es el mismo que el de abajo
+    const normalizedUser = user ? mapUserFromFirebaseAuthToUser(user) : null
     onChange(normalizedUser)
   })
 }
 
 export const loginWithGitHub = () => {
   const gitHubProvider = new firebase.default.auth.GithubAuthProvider()
-  return firebase.default
-    .auth()
-    .signInWithPopup(gitHubProvider)
+  return firebase.default.auth().signInWithPopup(gitHubProvider)
 }
