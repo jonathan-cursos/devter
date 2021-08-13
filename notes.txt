@@ -1,49 +1,14 @@
-Añadir eslint
+Style modules
 
--Todas las dependencias relacionadas son de desarrollo.
--Al usar create-next-app nos crea un archivo eslint, lo eliminamos.
--Instalamos eslint.
--Corremos el comando 'npx eslint --init', colocaremos la configuración:
-  ...like to use?: Ver sintaxis, problemas y forzar estilo.
-  ...type of modules? Según sea el caso, en el nuesto import/export.
-  ...framework: Según el caso.
-  ...typescript: Según el caso.
-  ...where the code run: Ambas en nuestro caso, para ello presionamos 'a'. Sí solo
-    ocupamos una, con space.
-  ...style for project: popular (gusto del profesor).
-  ...style guide: Standar (gusto del profesor).
-  ...format config file: JS.
-  ...install dependences with npm: Le damos no, porque algunas versiones están
-    predefinidas, aun así nos creará el archivo.
--Instalamos esas dependencias (eliminando la version que viene ahí, solo con el 
-  nombre).
-
--Es importante saber que es mala practica tener un formateador por defecto, por
-  lo que lo quitamos, debemos tener uno diferente por proyecto.
--Eslnt nos va a formatear el codigo cuando corramos un comando que explicamos ahora,
-  pero debemos instalar su plugin.
-
-Comandos:
-  -npx eslint .: Nos informa los errores.
-  -npx eslint . --fix: Nos soluciona los errores que pueda.
-    .Este comando es el que colocaremos en el package, en el script "lint".
-
--Ahora, el formateo no está siendo el esperado, por lo que creamos un archivo 
-  llamado .prettierrc y tendrá por ahorá la configuración del archivo que tenemos
-  ahí. Esta configuración se puede añadir al editor entero manualmente con ctrl+,
-   así no tener un archivo de configuración, que es lo recomendable.
-
--Aun hay unos errores, pero están chocando con la utilidad de Next, como tener 
-  importado React, para ello, en .eslintrc, podemos sobreescribir reglas, en el
-  objeto vacío que está ahí, así que colocamos estas 2 para tener el código completo
-  limpio:
-    .'react/prop-types': 'off',
-    .'react/react-in-jsx-scope': 'off'
-
--Tambien hay muchas estrategias para que antes de hacer un commit, se aplique 
-  prettier y eslint (en ese orden), nosotros usaremos lint-staged.
--Para instalarlo: npx mrm lint-staged
--Esto nos realizará unos cambios en el package para aplicar esa estrategia.
--Para esto, hay que tener dos dependencias instaladas en el proyecto, prettier y 
-  eslint-config-prettier. Y en eslint, colocar como ultimo elemento en extends,
-  'prettier'.
+-Actualmente, al usar create-next-app usa style modules en lugar de style-in-jsx.
+-Esto significa que podemos hacer lo siguiente:
+  .En la carpeta del componente creamos un archivo llamado 'styles.module.css', 
+    debe llamarse así.
+  .Lo importamos como cualquier componente (no de estilos), con un nombre.
+  .Ahora, las clases colocadas en ese archivo, las podemos dar como valor a la
+    prop className de cada elemento segun lo deseamos.
+  .Pero no se colocan como texto, sino como variable.
+  .Suponiendo que los estilos se imporaran con el nombre style, entonces cada 
+    className se llamaría así: style.className.
+  .El primer elemento de cada selector dentro del archivo de estilos debe ser
+    el que hace referencia al elemento de ese className.
