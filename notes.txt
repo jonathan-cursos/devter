@@ -1,14 +1,12 @@
-Style modules
+jsconfig.json
 
--Actualmente, al usar create-next-app usa style modules en lugar de style-in-jsx.
--Esto significa que podemos hacer lo siguiente:
-  .En la carpeta del componente creamos un archivo llamado 'styles.module.css', 
-    debe llamarse así.
-  .Lo importamos como cualquier componente (no de estilos), con un nombre.
-  .Ahora, las clases colocadas en ese archivo, las podemos dar como valor a la
-    prop className de cada elemento segun lo deseamos.
-  .Pero no se colocan como texto, sino como variable.
-  .Suponiendo que los estilos se imporaran con el nombre style, entonces cada 
-    className se llamaría así: style.className.
-  .El primer elemento de cada selector dentro del archivo de estilos debe ser
-    el que hace referencia al elemento de ese className.
+-Sí colocamos este archivo en la raíz del proyecto, podemos elegir cierta config.
+  especifica para nuestro proyecto.
+-Por ejemplo, colocando el objeto "compilerOptions", y dentro un elemento
+  "baseUrl": ".", indicamos que todos los imports empiecen desde la raíz del
+  proyecto.
+-Esto para mayor facilidad a la hora de importar si tenemos archivos que esten 
+  dentro de muchos niveles de carpetas, y necesiten algo que este en la raíz o
+  proximo.
+-Ya no necesitariamos poner, por ejemplo, el ..
+-Sí tenemos archivos en la misma carpeta, si podemos acceder con .
