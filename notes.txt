@@ -1,6 +1,21 @@
-Correccion de autenticación:
-  -Como en el index estamos diciendo que mostramos el boton de GH solo sí el valor
-    del usuario es null, pero el valor por defecto es undefined, solo mostrará el
-    boton sí hacemos una corrección en la función que mantiene activa la sessión.
-  -El cambio debe ser, que el valor de normalizedUser, sí no traemos un usuario,
-    sea null.
+Endpoints y peticiones a la API
+
+-Para crear rutas a la api, dentro de pages, colocamos la carpeta api, ahí todas
+  las carpetas serán las rutas hacia los endpoints.
+-Dentro de los endpoints, podemos exportar una función, que como parametro tenga
+  req y res.
+-Entre los detalles que podemos notar:
+  .Para definir el estado usamos: res.statusCode = ###.
+  -Definimos la cabecera con res.setHeader(), y la de Content-Type lo hacemos
+    porque el navegador puede intentar formatear como otra cosa
+  -El send es el mismo en node.
+
+Peticiones:
+  -Sí realizamos una petición a un endpoint de next desde el cliente (desde el
+    componente) no es necesario colocar localhost...
+  -Por el contrario, sí usamos initialProps estas se ejecutan en el servidor, y 
+    como este no sabe las rutas, debemos usarlo.
+
+-A la hora de pasar props a un componente, no es recomendable pasar todas al mismo
+  tiempo en un objeto destructurado, porque pueden haber props no usadas o que
+  afecten al useMemo.
