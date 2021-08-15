@@ -1,21 +1,37 @@
-Endpoints y peticiones a la API
+-Vamos a usar firebase como base de datos.
+-En Firebase hay 2 tipos:
+  .Firestore: La que usaremos.
+  .Real Time Db: La más antigua.
 
--Para crear rutas a la api, dentro de pages, colocamos la carpeta api, ahí todas
-  las carpetas serán las rutas hacia los endpoints.
--Dentro de los endpoints, podemos exportar una función, que como parametro tenga
-  req y res.
--Entre los detalles que podemos notar:
-  .Para definir el estado usamos: res.statusCode = ###.
-  -Definimos la cabecera con res.setHeader(), y la de Content-Type lo hacemos
-    porque el navegador puede intentar formatear como otra cosa
-  -El send es el mismo en node.
+-Una corrección importante es ver que tantp en el evento de login como en el de
+  mantener el usuario estamos colocando la info en el estado, esto ya no es 
+  necesario hacerlo en el login.
 
-Peticiones:
-  -Sí realizamos una petición a un endpoint de next desde el cliente (desde el
-    componente) no es necesario colocar localhost...
-  -Por el contrario, sí usamos initialProps estas se ejecutan en el servidor, y 
-    como este no sabe las rutas, debemos usarlo.
+-El estilo 'backdrop-filter: blur(5px)' da un efecto de blur al fondo del elemento.
+-IMPORTANTE: El estilo 'resize:none' hace que los text-area no se pueda manejar el
+  tamaño en la interfaz.
 
--A la hora de pasar props a un componente, no es recomendable pasar todas al mismo
-  tiempo en un objeto destructurado, porque pueden haber props no usadas o que
-  afecten al useMemo.
+Diferencia entre push y replace del router:
+  -Push empuja la interfaz hacia una ruta, dejando un historial de las rutas donde
+    se ha estado, y pudiendo navegar hacia atras.
+  -Por otro lado, podemos usar replace cuando queremos remplazar la ruta que está en
+    el navegador, y no guardar el historial de la ruta en la que se estuvo antes.
+  -En nuestro caso usamos replace, porque estamos reestringiendo el uso de rutas, en
+    donde sí el usuario no esta logueado, y accedemos al home, los mueva al loggin,
+    y no tendría sentido que nuestro paso en el home quede en el historial.
+  -Hay que diferenciar el replace de location y del router, ya que el de location
+    recarga la página.
+
+Disabled:
+  -Los inputs pueden estar deshabilitados o no.
+  -Para deshabilitarlos se les pasa la prop disabled, la cual debe tener un boolean
+    como valor.
+  -Pero, esto no la deshabilita, para deshabilitarlo usamos css.
+  -En los estilos del boton podemos colocar un selector especial, que se aplica cuando
+    un elemento tiene o no una prop, en este caso sería: button[disabled], pero podría
+    ser cualquier prop. incluso validar el valor de esa prop.
+  -Ahora, los estilos para deshabilitarlo:
+    .pointer-events: none; Indica que no se podrá hacer nada con ese elemento.
+    .opacity: Una opacidad menor a 1, para mostrar que está inhabilitado.
+    .user-select: none; Este se aplica directo al selector, para que su texto no 
+      pueda seleccionarse.

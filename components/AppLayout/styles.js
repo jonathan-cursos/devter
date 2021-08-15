@@ -14,6 +14,7 @@ export const global = css.global`
     padding: 0;
     margin: 0;
     font-family: ${fonts.base};
+    overflow: hidden;
   }
 
   a {
@@ -23,6 +24,11 @@ export const global = css.global`
 
   * {
     box-sizing: border-box;
+  }
+
+  textarea,
+  input {
+    font-family: ${fonts.base};
   }
 `
 
@@ -39,6 +45,7 @@ export default css`
     height: 100%;
     width: 100%;
     position: relative;
+    overflow-y: auto;
   }
 
   @media (min-width: ${breakpoints.mobile}) {
