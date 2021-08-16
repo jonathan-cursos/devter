@@ -52,3 +52,19 @@ export const addDevit = ({ avatar, content, userId, userName }) => {
     sharedCount: 0
   })
 } // Esto retorna una promesa
+
+export const fetchLatestDevits = () => {
+  return db
+    .collection('devits')
+    .get()
+    .then((snapshot) => {
+      return snapshot.docs.map((doc) => {
+        const data = doc.data()
+        const id = doc.id
+        return {
+          id,
+          ...data
+        }
+      })
+    })
+}

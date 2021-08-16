@@ -1,44 +1,5 @@
-Firestore
+Obtener los datos de firestore
 
--Firestore es una DB NoSQL.
+-Tener presente que cada que creamos un documento en la colección, nos genera
+  automaticamente un ID de ese documento.
 
--Un pequeño cambio, es que en el client de firebase, dentro de los datos traídos del
-  usuario, traemos 'uid'.
--Esto trae el identificador unico de cada usuario de GH.
-
--Nos vamos a firebase > Firestore DB.
--Le damos a Crear DB.
-  .Aquí tenemos 2 opciones, prueba y producción.
-  .Las de pruebas no están pensadas en llegar a producción.
-  .Esto porque en producción hay que definir ciertas reglas de lo que pueden hacer
-    los usuarios.
-  .Por ahora vamos a poner modo prueba.
-  .Escogemos una región, esto para la latencia que puede haber.
-
--En Firestore hay 3 niveles:
-  .Colección.
-  .Dentro de cada una hay documentos.
-  .Dentro de cada documento están los datos.
-
--Crear una colección:
-  .Vamos en firebase/client e iniciamos la conexión con el metodo firebase.firestore()
-    en la raíz del documento asignado a una variable.
-  .Creamos la función para agregar:
-    -Con los parametros que le estamos enviando al hacer click en el boton.
-    -Retornamos collection('nombre_coleccion').add({datos}) de la variable de 
-      conexión.
-    -Vemos que en el 1ero agregamos la colección, y en la otra los datos.
-    -Esto es porque uno es ĺa colección, y la otra la data. En ese caso, el documento
-      será cada objeto que contiene un grupo de datos.
-  .Para el caso de la variable de fecha de creación, estamos usando el metodo
-    firebase.firestore.Timestamp.fromDate('Variable de fecha o new Date') porque el
-    profesor no está seguro sí se puede hacer solo con new Date.
-  .Al hacer la preba y enviar un dato, podemos notar que nos los está agregando sin 
-    haber creado un esquema. El peligro con esto es que podemos agregar algun dato
-    que no concuerde con esto y no habría problemas ni errores.
-
--Para definir los estados de carga, datos y error, por ahora estamos creando una 
-  obj. donde cada estado tiene un numero como valor, colocamos useState y lo 
-  modificamos dandole como valor alguno de esos elementos del objeto según el estado 
-  en que esta. Con esto incluso habilitamos o deshabilitamos el boton según 
-  .corresponda
