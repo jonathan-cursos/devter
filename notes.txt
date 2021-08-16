@@ -1,37 +1,44 @@
--Vamos a usar firebase como base de datos.
--En Firebase hay 2 tipos:
-  .Firestore: La que usaremos.
-  .Real Time Db: La más antigua.
+Firestore
 
--Una corrección importante es ver que tantp en el evento de login como en el de
-  mantener el usuario estamos colocando la info en el estado, esto ya no es 
-  necesario hacerlo en el login.
+-Firestore es una DB NoSQL.
 
--El estilo 'backdrop-filter: blur(5px)' da un efecto de blur al fondo del elemento.
--IMPORTANTE: El estilo 'resize:none' hace que los text-area no se pueda manejar el
-  tamaño en la interfaz.
+-Un pequeño cambio, es que en el client de firebase, dentro de los datos traídos del
+  usuario, traemos 'uid'.
+-Esto trae el identificador unico de cada usuario de GH.
 
-Diferencia entre push y replace del router:
-  -Push empuja la interfaz hacia una ruta, dejando un historial de las rutas donde
-    se ha estado, y pudiendo navegar hacia atras.
-  -Por otro lado, podemos usar replace cuando queremos remplazar la ruta que está en
-    el navegador, y no guardar el historial de la ruta en la que se estuvo antes.
-  -En nuestro caso usamos replace, porque estamos reestringiendo el uso de rutas, en
-    donde sí el usuario no esta logueado, y accedemos al home, los mueva al loggin,
-    y no tendría sentido que nuestro paso en el home quede en el historial.
-  -Hay que diferenciar el replace de location y del router, ya que el de location
-    recarga la página.
+-Nos vamos a firebase > Firestore DB.
+-Le damos a Crear DB.
+  .Aquí tenemos 2 opciones, prueba y producción.
+  .Las de pruebas no están pensadas en llegar a producción.
+  .Esto porque en producción hay que definir ciertas reglas de lo que pueden hacer
+    los usuarios.
+  .Por ahora vamos a poner modo prueba.
+  .Escogemos una región, esto para la latencia que puede haber.
 
-Disabled:
-  -Los inputs pueden estar deshabilitados o no.
-  -Para deshabilitarlos se les pasa la prop disabled, la cual debe tener un boolean
-    como valor.
-  -Pero, esto no la deshabilita, para deshabilitarlo usamos css.
-  -En los estilos del boton podemos colocar un selector especial, que se aplica cuando
-    un elemento tiene o no una prop, en este caso sería: button[disabled], pero podría
-    ser cualquier prop. incluso validar el valor de esa prop.
-  -Ahora, los estilos para deshabilitarlo:
-    .pointer-events: none; Indica que no se podrá hacer nada con ese elemento.
-    .opacity: Una opacidad menor a 1, para mostrar que está inhabilitado.
-    .user-select: none; Este se aplica directo al selector, para que su texto no 
-      pueda seleccionarse.
+-En Firestore hay 3 niveles:
+  .Colección.
+  .Dentro de cada una hay documentos.
+  .Dentro de cada documento están los datos.
+
+-Crear una colección:
+  .Vamos en firebase/client e iniciamos la conexión con el metodo firebase.firestore()
+    en la raíz del documento asignado a una variable.
+  .Creamos la función para agregar:
+    -Con los parametros que le estamos enviando al hacer click en el boton.
+    -Retornamos collection('nombre_coleccion').add({datos}) de la variable de 
+      conexión.
+    -Vemos que en el 1ero agregamos la colección, y en la otra los datos.
+    -Esto es porque uno es ĺa colección, y la otra la data. En ese caso, el documento
+      será cada objeto que contiene un grupo de datos.
+  .Para el caso de la variable de fecha de creación, estamos usando el metodo
+    firebase.firestore.Timestamp.fromDate('Variable de fecha o new Date') porque el
+    profesor no está seguro sí se puede hacer solo con new Date.
+  .Al hacer la preba y enviar un dato, podemos notar que nos los está agregando sin 
+    haber creado un esquema. El peligro con esto es que podemos agregar algun dato
+    que no concuerde con esto y no habría problemas ni errores.
+
+-Para definir los estados de carga, datos y error, por ahora estamos creando una 
+  obj. donde cada estado tiene un numero como valor, colocamos useState y lo 
+  modificamos dandole como valor alguno de esos elementos del objeto según el estado 
+  en que esta. Con esto incluso habilitamos o deshabilitamos el boton según 
+  .corresponda

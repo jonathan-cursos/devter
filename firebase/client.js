@@ -16,12 +16,15 @@ const firebaseConfig = {
 firebase.default.apps.length === 0 &&
   firebase.default.initializeApp(firebaseConfig)
 
+const db = firebase.firestore()
+
 const mapUserFromFirebaseAuthToUser = (user) => {
-  const { displayName, email, photoURL } = user
+  const { displayName, email, photoURL, uid } = user
   return {
     avatar: photoURL,
     username: displayName,
-    email
+    email,
+    uid
   }
 }
 
@@ -37,3 +40,15 @@ export const loginWithGitHub = () => {
   const gitHubProvider = new firebase.default.auth.GithubAuthProvider()
   return firebase.default.auth().signInWithPopup(gitHubProvider)
 }
+
+export const addDevit = ({ avatar, content, userId, userName }) => {
+  return db.collection('devits').add({
+    avatar,
+    content,
+    userId,
+    userName,
+    createAdd: firebase.firestore.Timestamp.fromDate(new Date()),
+    likesCount: 0,
+    sharedCount: 0
+  })
+} // Esto retorna una promesa
