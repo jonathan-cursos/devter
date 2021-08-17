@@ -19,17 +19,21 @@ export default function HomePage() {
         </header>
         <section>
           {console.log(timeLine)}
-          {timeLine.map(({ id, username, avatar, message }) => {
-            return (
-              <Devit
-                key={id}
-                username={username}
-                avatar={avatar}
-                message={message}
-                id={id}
-              />
-            )
-          })}
+          {timeLine.map(
+            ({ id, userName, avatar, content, userId, createdAt }) => {
+              return (
+                <Devit
+                  key={id}
+                  userName={userName}
+                  avatar={avatar}
+                  content={content}
+                  id={id}
+                  userId={userId}
+                  createdAt={createdAt}
+                />
+              )
+            }
+          )}
         </section>
         <nav></nav>
       </AppLayout>
