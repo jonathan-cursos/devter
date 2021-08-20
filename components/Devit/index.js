@@ -8,7 +8,11 @@ export default function Devit({ avatar, userName, content, id, createdAt }) {
           <Avatar alt={userName} src={avatar} />
         </div>
         <section>
-          <strong>{userName}</strong>
+          <header>
+            <strong>{userName}</strong>
+            <span> . </span>
+            <date>{createdAt}</date>
+          </header>
           <p>{content}</p>
         </section>
       </article>
@@ -26,6 +30,11 @@ export default function Devit({ avatar, userName, content, id, createdAt }) {
         p {
           line-height: 1.3125;
           margin: 0;
+        }
+
+        date {
+          color: #555;
+          font-size: 14px;
         }
       `}</style>
     </>

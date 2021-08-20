@@ -1,16 +1,15 @@
-Obtener los datos de firestore
+Reenderizar fecha con el formato guardado
 
--Tener presente que cada que creamos un documento en la colección, nos genera
-  automaticamente un ID de ese documento.
+-Por el formato en que guardamos la fecha, no podremos renderizarla así como está.
+-Es necesario realizar un cambio a la hora de traer los datos, especificamente el
+  de la fecha.
 
-Obtener datos de firestore:
-  -Creamos una funcion en firebase/client, que retorne los metodos 
-    .collection('nombre_coleccion').get() de la conexión a la DB.
-  -Esto retorna una promesa, esta no retornará los datos, sino un elemento 
-    'snapshot', este tiene un array con todos los documentos.
-  -De cada documento podemos sacar varias cosas, entre ellas:
-    .data(): Esto retorna el objeto con cada dato de un documento.
-    .id: Este es el id de cada archivo (no del usuario de GH).
-  -Finalmente retornaremos un objeto, con los datos necesitados sacados de cada
-    archivo.
-  -Al usar esta función, nos retornará una promesa con ese objeto.
+-Creamos una variable con la instancia Date, que tenga por parametro la propiedad
+  seconds del valor de la fecha traído de firestore, multiplicado por 1000 (esto 
+  para pasarlo a milisegundos).
+-Este dato hay que normalizarlo, creamos una instancia de: 
+  Intl.DateTimeFormat('es-CR').format().
+    .El parametro de DateTimeFormat es el formato de la hora del país.
+    .El parametro de format será la variable anterior.
+-Esa instancia es la fecha que vamos a retornar dentro del objeto, así se renderizará
+  con el formato dd/m/yyyy.
