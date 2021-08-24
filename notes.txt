@@ -1,43 +1,29 @@
-Creación del hook para la distancia de tiempo
+Actualizar el tiempo cada segundo
 
--Crearemos un array de arrays, donde indiquemos a cuanto equivale cada medida.
--El 1er valor será el nombre de la medida (day, hour, minute, second), y 
-  el segundo a cuantos segundos equivale.
--Hacemos solo estos porque despues de pasar los días, se mostrará la fecha, no 
-  hace cuanto.
+-Solo cambiaremos la estructura del hook, no de la otra función.
 
-Función para obtener la diferencia del tamstamp traido de la DB al día actual:
-  -El día actual se consigue con Date.now().
-  -La diferencia será (timestamp - actual). Lo pasamos a segundos dividiendolo 
-    entre 1000.
-  -Recorreremos el array con un for..of.
-    .El for..of ejecuta un bloque de codigo para cada elemento de un objeto 
-      iterable.
-    .for(elemento of iterable) - for([elem1, elemn...] of iterable).
-    .En nuestro caso, usaremos ambos elementos de cada array del creado al inicio
-      que será el iterable (los elementos pueden llevar cualquier nombre).
-  -Dentro, sí la diferencia (pasada a valor absoluto) es mayor a cada unidad de 
-    segundos del array, o el nombre de la unidad es 'second', devolveremos un obj
-    con el nombre de la unidad y el valor que tendrá esa unidad.
-  -Para obtener el valor, dividimos la diferencia entre los segundos a que equivale
-    cada unidad. Lo redondeamos hacia abajo, para que en caso de que pase, por 
-    ejemplo 70s, nos indique solo un minuto, y no 2 minutos.
-  
-Hook a exportar:
-  -Tambien recibe el tampstamp.
-  -Ejecutaremos la función anterior para traer cada valor que necesitamos en cada
-    unidad según corresponda.
-      .Sí se publicó hace 15s, que nos traíga hace cuantos segundos, minutos, 
-        horas y días.
-      .Sí no ha pasado alguna, debería indicar un valor negativo.
-  -Creamos una instancia de Intl.RelativeTimeFormat(). Esto será el que mostrará
-    el texto: 'Hace 15 minutos'.
-  -Lleva por parametros el idioma ('es' para español) y un objeto con conf. que
-    por ahora solo tendra style:'long', para que muestre la unidad en formato 
-    largo, o short (long: minutos, short: m).
-  -Finalmente retornamos la ejecución del metodo format() de la instancia, que
-    trae ambos valores traídos de la función de la ejecución anterior (por esto
-    el array tiene los nombres en ingles).
+-Usamos estado, que por defecto tendrá lo traido por la función, con el tampstamp.
+  .Para que esto solo se ejecute una vez, lo ejecutamos dentro de una función en
+    el useState.
 
--Cuando este hook se use, y se pase por parametro un valor como se vió en la clase
-  pasada, mostrara el formato de hace cuanto tiempo se publicó un elemento.
+-Colocamos un useEffect que se ejecute cuando cambie el tampstamp (parametro).
+-Este tendrá un intervalo que se ejecutará cada 1s (o segun se desea).
+-Este ejecutará la función nuevamente, y colocará su resultado en el estado.
+-Este useEffect retornará una función que limpie el intervalo.
+  .clearInterval(intervalo).
+
+-Fuera del effect, creamos la misma instancia.
+-El valor y la unidad los traemos ahora del estado.
+-El return es el mismo.
+
+Explicaciones:
+  -El setInterval es asincrono, es decir, se ejecuta todo 1ero, luego se empieza 
+    a ejecutar.
+  -Al colocar el useEffect, como se ejecuta siempre una vez al inicio, se ejecuta,
+    y dejará el interval corriendo, que al cabo de 5s hará sus resultados y se
+    limpiará.
+  -Como el tampstamp está cambiando cada segundo, vuelve a ejecutar el useEffect,
+    que está haciendo el interval de nuevo, y autolimpiandolo, pero este ejecutará
+    lo que tenga internamente al menos una vez antes de limpiarse.
+  -El useEffect hace que toda la función se ejecute de nuevo, ya que cambia valores
+    de afuera.

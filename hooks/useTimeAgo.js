@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 const DATE_UNITS = [
   // A cuanto equivale cada unidad en segundos
   // Lo hacemos con un nombre, porque vamos a usar el nombre en el frontend
@@ -19,10 +21,22 @@ const getDateDiffs = (timestamp) => {
 }
 
 export default function useTimeAge(timestamp) {
-  const { value, unit } = getDateDiffs(timestamp)
+  const [timeAgo, setTimeAgo] = useState(() => getDateDiffs(timestamp))
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newTimeAgo = getDateDiffs(timestamp)
+      setTimeAgo(newTimeAgo)
+    }, 5000)
+    console.log('Salimos')
+    return () => clearInterval(interval)
+  }, [timestamp])
+
   const rtf = new Intl.RelativeTimeFormat('es', {
     style: 'short'
   })
+
+  const { value, unit } = timeAgo
 
   return rtf.format(value, unit)
 }
