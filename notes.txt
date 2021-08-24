@@ -1,17 +1,43 @@
-Arreglar problema del tiempo
+Creación del hook para la distancia de tiempo
 
--Timestamp: Es el número de milisegundos que han pasado desde una fecha constante
-  del lenguaje. Es una forma para saber que fecha estamos. Nos proporciona poder
-  comparar dos fechas, y con esto calcular lo que necesitamos. 
+-Crearemos un array de arrays, donde indiquemos a cuanto equivale cada medida.
+-El 1er valor será el nombre de la medida (day, hour, minute, second), y 
+  el segundo a cuantos segundos equivale.
+-Hacemos solo estos porque despues de pasar los días, se mostrará la fecha, no 
+  hace cuanto.
 
--Vamos a ignorar la solución que se dió al final de la clase anterior.
+Función para obtener la diferencia del tamstamp traido de la DB al día actual:
+  -El día actual se consigue con Date.now().
+  -La diferencia será (timestamp - actual). Lo pasamos a segundos dividiendolo 
+    entre 1000.
+  -Recorreremos el array con un for..of.
+    .El for..of ejecuta un bloque de codigo para cada elemento de un objeto 
+      iterable.
+    .for(elemento of iterable) - for([elem1, elemn...] of iterable).
+    .En nuestro caso, usaremos ambos elementos de cada array del creado al inicio
+      que será el iterable (los elementos pueden llevar cualquier nombre).
+  -Dentro, sí la diferencia (pasada a valor absoluto) es mayor a cada unidad de 
+    segundos del array, o el nombre de la unidad es 'second', devolveremos un obj
+    con el nombre de la unidad y el valor que tendrá esa unidad.
+  -Para obtener el valor, dividimos la diferencia entre los segundos a que equivale
+    cada unidad. Lo redondeamos hacia abajo, para que en caso de que pase, por 
+    ejemplo 70s, nos indique solo un minuto, y no 2 minutos.
+  
+Hook a exportar:
+  -Tambien recibe el tampstamp.
+  -Ejecutaremos la función anterior para traer cada valor que necesitamos en cada
+    unidad según corresponda.
+      .Sí se publicó hace 15s, que nos traíga hace cuantos segundos, minutos, 
+        horas y días.
+      .Sí no ha pasado alguna, debería indicar un valor negativo.
+  -Creamos una instancia de Intl.RelativeTimeFormat(). Esto será el que mostrará
+    el texto: 'Hace 15 minutos'.
+  -Lleva por parametros el idioma ('es' para español) y un objeto con conf. que
+    por ahora solo tendra style:'long', para que muestre la unidad en formato 
+    largo, o short (long: minutos, short: m).
+  -Finalmente retornamos la ejecución del metodo format() de la instancia, que
+    trae ambos valores traídos de la función de la ejecución anterior (por esto
+    el array tiene los nombres en ingles).
 
--Para poder obtener el timestamp que necesitamos, traemos la fecha que guardamos en
-  la DB, y para pasarla en timestamp colocamos el "unary operator": +fecha.toDate().
-
--El operador unary es el signo de "+".
-
--Ahora este valor lo vamos a pasar como parametro a un custom hook, que retornará
-  exactamente un texto que diga hace cuanto se creo.
-
--El detalle es que será escrito con la API del navegador, sin usar librerías.
+-Cuando este hook se use, y se pase por parametro un valor como se vió en la clase
+  pasada, mostrara el formato de hace cuanto tiempo se publicó un elemento.
