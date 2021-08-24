@@ -1,15 +1,17 @@
-Reenderizar fecha con el formato guardado
+Arreglar problema del tiempo
 
--Por el formato en que guardamos la fecha, no podremos renderizarla así como está.
--Es necesario realizar un cambio a la hora de traer los datos, especificamente el
-  de la fecha.
+-Timestamp: Es el número de milisegundos que han pasado desde una fecha constante
+  del lenguaje. Es una forma para saber que fecha estamos. Nos proporciona poder
+  comparar dos fechas, y con esto calcular lo que necesitamos. 
 
--Creamos una variable con la instancia Date, que tenga por parametro la propiedad
-  seconds del valor de la fecha traído de firestore, multiplicado por 1000 (esto 
-  para pasarlo a milisegundos).
--Este dato hay que normalizarlo, creamos una instancia de: 
-  Intl.DateTimeFormat('es-CR').format().
-    .El parametro de DateTimeFormat es el formato de la hora del país.
-    .El parametro de format será la variable anterior.
--Esa instancia es la fecha que vamos a retornar dentro del objeto, así se renderizará
-  con el formato dd/m/yyyy.
+-Vamos a ignorar la solución que se dió al final de la clase anterior.
+
+-Para poder obtener el timestamp que necesitamos, traemos la fecha que guardamos en
+  la DB, y para pasarla en timestamp colocamos el "unary operator": +fecha.toDate().
+
+-El operador unary es el signo de "+".
+
+-Ahora este valor lo vamos a pasar como parametro a un custom hook, que retornará
+  exactamente un texto que diga hace cuanto se creo.
+
+-El detalle es que será escrito con la API del navegador, sin usar librerías.
