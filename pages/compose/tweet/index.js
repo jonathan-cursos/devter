@@ -5,6 +5,7 @@ import useUser from 'hooks/useUser'
 
 import { addDevit, uploadImage } from 'firebase/client'
 import { useRouter } from 'next/router'
+import Avatar from 'components/Avatar'
 import Head from 'next/head'
 
 const COMPOSE_STATES = {
@@ -102,28 +103,36 @@ export default function ComposeTweet() {
         <Head>
           <title>Crear un nuevo devit / Devter</title>
         </Head>
-        <form onSubmit={handleSubmit}>
-          <textarea
-            placeholder='¿Qué está pasando?'
-            onChange={handleChange}
-            onDragEnter={handleDragEnter} // Cuando entramos
-            onDragLeave={handleDragLeave} // Cuando entramos y quitamos
-            onDrop={handleDrop} // Cuan entramos y soltamos la imagen
-          ></textarea>
-          {imageURL && (
-            <section>
-              <button
-                onClick={() => {
-                  setImageURL(null)
-                }}
-              >
-                x
-              </button>
-              <img src={imageURL} />
+        <section className='form-container'>
+          {user && (
+            <section className='avatar-container'>
+              <Avatar src={user.avatar} />
             </section>
           )}
-          <Button disabled={isButtonDisabled}>Devittear</Button>
-        </form>
+
+          <form onSubmit={handleSubmit}>
+            <textarea
+              placeholder='¿Qué está pasando?'
+              onChange={handleChange}
+              onDragEnter={handleDragEnter} // Cuando entramos
+              onDragLeave={handleDragLeave} // Cuando entramos y quitamos
+              onDrop={handleDrop} // Cuan entramos y soltamos la imagen
+            ></textarea>
+            {imageURL && (
+              <section className='remove-image'>
+                <button
+                  onClick={() => {
+                    setImageURL(null)
+                  }}
+                >
+                  x
+                </button>
+                <img src={imageURL} />
+              </section>
+            )}
+            <Button disabled={isButtonDisabled}>Devittear</Button>
+          </form>
+        </section>
       </AppLayout>
       <style jsx>{`
         div {
@@ -142,8 +151,18 @@ export default function ComposeTweet() {
           right: 15px;
         }
 
-        section {
+        .remove-image {
           position: relative;
+        }
+
+        .form-container {
+          display: flex;
+          align-items: flex-start;
+        }
+
+        .avatar-container {
+          padding-top: 20px;
+          padding-left: 10px;
         }
 
         form {
