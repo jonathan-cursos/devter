@@ -1,18 +1,47 @@
-Subir imagen a Firebase cloud storage
+Creación del drag and drop sin dependencias
 
--La idea va a ser hacer un drag and drop, en donde al soltar la imagen, inmediatamente se suba al storage
-  de firebase.
+-Tenemos una const obj. que tendrá un valor por cada estado que puede tener el DaD del -1 al 4.
+  .ERROR: -1,
+  .NONE: 0,
+  .DRAG_OVER: 1, // Al momento de arrastrar
+  .UPLOADING: 2,
+  .COMPLETE: 4
 
--Debemos ir a nuestro proyecto de firebase > storage.
--Ahí deberíamos dar en iniciar, pero en nuestro caso ya venía iniciado.
-  .Para iniciar dejamos las configs. por defecto.
+-Tendremos 3 estados:
+  .drag: Por defecto tendrá el none del objeto. Para controlar los estados que tendrá el DaD.
+    -Por esto, irá cambiando según los metodos que veremos ahora.
+  .task: Null por defecto. Obtendrá la tarea devuelta por metodo de firestore.
+  .imageURL: Null por defecto. En ella almacenamos el URL para agregarlo despues al devit, y
+    tener en los datos enviados una referencia a la imagen almacenada.
 
-Vamos al archivo de firebase:
-  -Exportamos una nueva función que traerá el archivo por parametro.
-  -Vamos a obtener la referencia del archivo con: firebase.storage().ref('direccion/[nombre_archivo]').
-    .La dirección del archivo será la ruta de la carpeta que contendrá las imagenes en firebase, sí no
-      existe, lo crea.
-    .El nombre lo conseguimos con el elemento name del archivo.
-  -Retornaremos la tarea, esta la conseguimos con el metodo put() de la referencia, y el archivo como param.
+-El textarea será el que tenga el DaD, entonces tendrá 3 eventos:
+  .onDragEnter: Cuando entramos.
+  .onDragLeave: Cuando entramos y quitamos.
+  .onDrop: Cuan entramos y soltamos la imagen.
+  .Es necesario usar el preventDefault en todos, de lo contrario abre la img en el navegador.
 
--En la siguiente clase explicamos el drag and drop, y usaremos este metodo.
+-Los metodos de dragEnter y dragLeave, en nuestro caso, colocarán el estado de drag en
+  over y none respectivamente.
+-El drop es el que realizará todo, ya que la imagen se procesa al soltarla.
+-Es bueno saber, que estamos almacenando cada estado para poder realizar cambios en la interfaz
+  segun lo necesitemos con distintos estilos.
+
+Evento onDrop:
+  -Coloca el estado del drag en none.
+  -El archivo a enviar estará en el evento en envent.dataTransfer.files[0].
+    .Esto en caso de querer enviar solo uno, podemos enviar enviar varios a la vez, pero
+      por practicidad estamos enviando solo uno.
+  -Ese archivo lo pasamos como parametro del metodo que hicimos en firebase.
+  -Este metodo nos devuelve un task, que colocamos en el estado del task.
+
+Effecto del task:
+  -Vamos a colocar un efecto cuando este task tenga un cambio.
+  -Cuando este task cambie, es porque se subió la foto, y en ese task tenemos la URL de
+    esta.
+  -Entonces vamos a colocar esa URL en el estado de ella, pero no se consigue tan sencilla.
+  -De ese task, ejecutamos el metodo snapshot.ref.getDownloadURL().
+  -Esto nos da una promesa que tiene ese url.
+
+-Como en el mismo componente estamos enviando los datos, del estado obtenemos la URL para enviarla.
+-Para eso, debemos realizar un cambio en el archivo de firebase, actualizando el metodo addDevit, para 
+  que por parametro tenga esa URL y la envie.
