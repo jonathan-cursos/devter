@@ -1,7 +1,6 @@
-Ordenar datos traidos
+Añadir fondo redondo al hover
 
--Para ordenar los datos traidos, en el archivo de firebase, en el metodo
-  para traer datos, y del metodo collection() que teniamos ejecutamos orderBy() (este
-  irá antes del get())
--Dentro tendrá como param. un string con el nombre del dato por el que se desea 
-  acomodar, y de segundo, un string que diga si es 'desc' o 'asc'.
+-Si vemos, al hacer hover sobre los elem del menu se resalta un fondo redondo.
+-Para hacer esto, al hacer hover sobre a, le daremos un fondo que sea un 
+  radial-gradient.
+-Le damos un tamaño alto y ancho (aqui lo hicimos con 180px) y lo centramos.
