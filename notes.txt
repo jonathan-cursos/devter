@@ -1,29 +1,7 @@
-Actualizar el tiempo cada segundo
+Ordenar datos traidos
 
--Solo cambiaremos la estructura del hook, no de la otra función.
-
--Usamos estado, que por defecto tendrá lo traido por la función, con el tampstamp.
-  .Para que esto solo se ejecute una vez, lo ejecutamos dentro de una función en
-    el useState.
-
--Colocamos un useEffect que se ejecute cuando cambie el tampstamp (parametro).
--Este tendrá un intervalo que se ejecutará cada 1s (o segun se desea).
--Este ejecutará la función nuevamente, y colocará su resultado en el estado.
--Este useEffect retornará una función que limpie el intervalo.
-  .clearInterval(intervalo).
-
--Fuera del effect, creamos la misma instancia.
--El valor y la unidad los traemos ahora del estado.
--El return es el mismo.
-
-Explicaciones:
-  -El setInterval es asincrono, es decir, se ejecuta todo 1ero, luego se empieza 
-    a ejecutar.
-  -Al colocar el useEffect, como se ejecuta siempre una vez al inicio, se ejecuta,
-    y dejará el interval corriendo, que al cabo de 5s hará sus resultados y se
-    limpiará.
-  -Como el tampstamp está cambiando cada segundo, vuelve a ejecutar el useEffect,
-    que está haciendo el interval de nuevo, y autolimpiandolo, pero este ejecutará
-    lo que tenga internamente al menos una vez antes de limpiarse.
-  -El useEffect hace que toda la función se ejecute de nuevo, ya que cambia valores
-    de afuera.
+-Para ordenar los datos traidos, en el archivo de firebase, en el metodo
+  para traer datos, y del metodo collection() que teniamos ejecutamos orderBy() (este
+  irá antes del get())
+-Dentro tendrá como param. un string con el nombre del dato por el que se desea 
+  acomodar, y de segundo, un string que diga si es 'desc' o 'asc'.
