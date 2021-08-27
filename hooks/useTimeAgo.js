@@ -28,7 +28,6 @@ export default function useTimeAge(timestamp) {
       const newTimeAgo = getDateDiffs(timestamp)
       setTimeAgo(newTimeAgo)
     }, 5000)
-    console.log('Salimos')
     return () => clearInterval(interval)
   }, [timestamp])
 

@@ -1,6 +1,18 @@
-Añadir fondo redondo al hover
+Subir imagen a Firebase cloud storage
 
--Si vemos, al hacer hover sobre los elem del menu se resalta un fondo redondo.
--Para hacer esto, al hacer hover sobre a, le daremos un fondo que sea un 
-  radial-gradient.
--Le damos un tamaño alto y ancho (aqui lo hicimos con 180px) y lo centramos.
+-La idea va a ser hacer un drag and drop, en donde al soltar la imagen, inmediatamente se suba al storage
+  de firebase.
+
+-Debemos ir a nuestro proyecto de firebase > storage.
+-Ahí deberíamos dar en iniciar, pero en nuestro caso ya venía iniciado.
+  .Para iniciar dejamos las configs. por defecto.
+
+Vamos al archivo de firebase:
+  -Exportamos una nueva función que traerá el archivo por parametro.
+  -Vamos a obtener la referencia del archivo con: firebase.storage().ref('direccion/[nombre_archivo]').
+    .La dirección del archivo será la ruta de la carpeta que contendrá las imagenes en firebase, sí no
+      existe, lo crea.
+    .El nombre lo conseguimos con el elemento name del archivo.
+  -Retornaremos la tarea, esta la conseguimos con el metodo put() de la referencia, y el archivo como param.
+
+-En la siguiente clase explicamos el drag and drop, y usaremos este metodo.

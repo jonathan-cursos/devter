@@ -7,6 +7,7 @@ import Create from 'components/Icons/Create'
 import Home from 'components/Icons/Home'
 import Search from 'components/Icons/Search'
 import Link from 'next/link'
+import Head from 'next/head'
 import { colors } from 'styles/theme'
 
 export default function HomePage() {
@@ -19,13 +20,16 @@ export default function HomePage() {
   return (
     <>
       <AppLayout>
+        <Head>
+          <title>Inicio / Devter</title>
+        </Head>
         <header>
           <h2>Inicio</h2>
         </header>
         <section>
           {console.log(timeLine)}
           {timeLine.map(
-            ({ id, userName, avatar, content, userId, createdAt }) => {
+            ({ id, userName, avatar, content, userId, createdAt, img }) => {
               return (
                 <Devit
                   key={id}
@@ -35,6 +39,7 @@ export default function HomePage() {
                   id={id}
                   userId={userId}
                   createdAt={createdAt}
+                  img={img}
                 />
               )
             }
