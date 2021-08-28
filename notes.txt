@@ -1,27 +1,11 @@
-Creando endpoints
+Hover a un elemento con otros elementos clickeables dentro
 
--La ventaja de crear endpoints directamente en next es que estamos trayendo datos 
-  directamente en el servidor, y no estamos pasando por el cliente para traerlos.
-
--Lo que haremos ahora será obtener un devit según el id que pasaremos a la ruta del
-  endpoint, y así, traer datos no desde el cliente, sino desde el servidor.
-
--Se puede tener rutas dinamicas tambien en los endpoints, de la misma manera que en
-  las pages.
-
--Para obtener un parametro de la ruta, lo sacamos de la req de cada endpoint.
-
--Para crear un endpoint, en un archivo de la api, exportamos una función, tendrá por
-  params la req y la response.
-
-Endpoint creado:
-  -Guardamos el Id que traemos de la ruta.
-  -Traemos la función exportada en el archivo admin.
-  -De ella vamos a usar los metodos:
-    .collection('nombre colección')
-    .doc('nombre_documento'): El documento con los datos, ahí será el id.
-    .get(): Para traer datos.
-  -Vemos que lo que estamos haciendo es similar a como traímos datos en el cliente, 
-    pero adaptado al servidor.
-  -Lo anterior nos devuelve una promesa, donde el valor será un documento, pero para
-    traer sus datos, ejecutamos el metodo data() de ese documento.
+-Es mala practica tener un elemento clickeable que dentro tenga otro (como un ancla que
+  dentro tenga un boton).
+-Para solucionarlo, en nuestro caso, tenemos un article, con un elemento time dentro, 
+  y queremos que al hacer hover sobre el article y cualquiera de sus hijos tenga unos
+  estilos, pero que al dar click, solo podamos hacerlo al article y a la fecha.
+-Para solucionarlo, el hover se lo aplicamos al article, y los estilos se aplicaran
+  aun si hacemos hover sobre cualquiera de sus hijos.
+-Para el click, podemos usar el evento onClick sobre el article en especifico, y así
+  nos llevará a la misma página sí hacemos click sobre la fecha o sobre el article.
