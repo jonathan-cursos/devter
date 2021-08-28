@@ -1,6 +1,6 @@
-Obtención de una imagen en firebase
+Rutas dinamicas
 
--Debemos fijarnos que en el metodo de traer datos de firebase este tambien
-  trayendo la imagen.
--En caso de ser así, podemos manipularlo como cualquier otro dato, ya que lo que 
-  traemos en un URL, que colocaremos en ima etiqueta img.
+-Para la creación de rutas dinamicas, dentro de pages, colocaremos el nombre de la 
+  carpeta que será la página, y para definir una ruta dinamica usaremos [nombre_ruta].
+-Ese [nombre_ruta] puede ser el nombre de una carpeta, o un archivo js.
+-Usaremos el archivo en caso de que no tengamos más rutas adentro de esa.
