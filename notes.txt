@@ -1,6 +1,5 @@
-Rutas dinamicas
+Layout en todas las páginas
 
--Para la creación de rutas dinamicas, dentro de pages, colocaremos el nombre de la 
-  carpeta que será la página, y para definir una ruta dinamica usaremos [nombre_ruta].
--Ese [nombre_ruta] puede ser el nombre de una carpeta, o un archivo js.
--Usaremos el archivo en caso de que no tengamos más rutas adentro de esa.
+-Para usar el mismo layout en todas las páginas, iremos al archivo _app.js.
+-Aquí, el elemento <Component /> debe estár envuelto en ese layout.
+-Al guardar los cambios, no se verán hasta reiniciar el servidor.

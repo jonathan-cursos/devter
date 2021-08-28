@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import AppLayout from 'components/AppLayout'
 import Button from 'components/Button'
 import useUser from 'hooks/useUser'
 
@@ -99,41 +98,39 @@ export default function ComposeTweet() {
 
   return (
     <>
-      <AppLayout>
-        <Head>
-          <title>Crear un nuevo devit / Devter</title>
-        </Head>
-        <section className='form-container'>
-          {user && (
-            <section className='avatar-container'>
-              <Avatar src={user.avatar} />
+      <Head>
+        <title>Crear un nuevo devit / Devter</title>
+      </Head>
+      <section className='form-container'>
+        {user && (
+          <section className='avatar-container'>
+            <Avatar src={user.avatar} />
+          </section>
+        )}
+
+        <form onSubmit={handleSubmit}>
+          <textarea
+            placeholder='¿Qué está pasando?'
+            onChange={handleChange}
+            onDragEnter={handleDragEnter} // Cuando entramos
+            onDragLeave={handleDragLeave} // Cuando entramos y quitamos
+            onDrop={handleDrop} // Cuan entramos y soltamos la imagen
+          ></textarea>
+          {imageURL && (
+            <section className='remove-image'>
+              <button
+                onClick={() => {
+                  setImageURL(null)
+                }}
+              >
+                x
+              </button>
+              <img src={imageURL} />
             </section>
           )}
-
-          <form onSubmit={handleSubmit}>
-            <textarea
-              placeholder='¿Qué está pasando?'
-              onChange={handleChange}
-              onDragEnter={handleDragEnter} // Cuando entramos
-              onDragLeave={handleDragLeave} // Cuando entramos y quitamos
-              onDrop={handleDrop} // Cuan entramos y soltamos la imagen
-            ></textarea>
-            {imageURL && (
-              <section className='remove-image'>
-                <button
-                  onClick={() => {
-                    setImageURL(null)
-                  }}
-                >
-                  x
-                </button>
-                <img src={imageURL} />
-              </section>
-            )}
-            <Button disabled={isButtonDisabled}>Devittear</Button>
-          </form>
-        </section>
-      </AppLayout>
+          <Button disabled={isButtonDisabled}>Devittear</Button>
+        </form>
+      </section>
       <style jsx>{`
         div {
           padding: 15px;
