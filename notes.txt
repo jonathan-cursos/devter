@@ -1,5 +1,22 @@
-Layout en todas las páginas
+Crear conexión a Firebase admin
 
--Para usar el mismo layout en todas las páginas, iremos al archivo _app.js.
--Aquí, el elemento <Component /> debe estár envuelto en ese layout.
--Al guardar los cambios, no se verán hasta reiniciar el servidor.
+Firebase admin:
+  -Lo que nos permite es usar Firebase desde el servidor.
+  -Se puede usar como sí fuera el modo administración desde un servidor.
+  -Lo usaremos dentro de la API que usaremos en los endpoints de esta app.
+
+-Para ello, iremos en Firebase console > Conf del proyecto > Cuentas de servicio.
+-Aparece markada la opción SDK Admin, esa es la que usaremos.
+-Le daremos a generar clave privada, esto nos descarga un .json que colocaremos en la
+  raíz del proyecto.
+    .Esto debe ser super secreto, no podemos subirlo al repositorio.
+    .Sí ya habiamos generado una, y generamos una nueva, la anterior ya no será valida.
+-El codigo que viene ahí usaremos el de Node.js, y lo copiaremos, y pegaremos en un
+  archivo que llamamos admin, en la carpeta de js.
+-El admin.initializeApp() debe ir dentro de un try-catch o no funcionará.
+-Cambiamos el import que viene ahí del serviceAccount al json que movimos a nuestra
+  raíz.
+-Le añadimos un export (no por default), donde exportemos el metodo de admin que vamos
+  a usar, en nuestro caso será firestore() que indica que esa app es la que vamos a 
+  usar.
+-Debemos instalar firebase-admin.
