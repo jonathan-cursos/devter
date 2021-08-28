@@ -1,22 +1,27 @@
-Crear conexión a Firebase admin
+Creando endpoints
 
-Firebase admin:
-  -Lo que nos permite es usar Firebase desde el servidor.
-  -Se puede usar como sí fuera el modo administración desde un servidor.
-  -Lo usaremos dentro de la API que usaremos en los endpoints de esta app.
+-La ventaja de crear endpoints directamente en next es que estamos trayendo datos 
+  directamente en el servidor, y no estamos pasando por el cliente para traerlos.
 
--Para ello, iremos en Firebase console > Conf del proyecto > Cuentas de servicio.
--Aparece markada la opción SDK Admin, esa es la que usaremos.
--Le daremos a generar clave privada, esto nos descarga un .json que colocaremos en la
-  raíz del proyecto.
-    .Esto debe ser super secreto, no podemos subirlo al repositorio.
-    .Sí ya habiamos generado una, y generamos una nueva, la anterior ya no será valida.
--El codigo que viene ahí usaremos el de Node.js, y lo copiaremos, y pegaremos en un
-  archivo que llamamos admin, en la carpeta de js.
--El admin.initializeApp() debe ir dentro de un try-catch o no funcionará.
--Cambiamos el import que viene ahí del serviceAccount al json que movimos a nuestra
-  raíz.
--Le añadimos un export (no por default), donde exportemos el metodo de admin que vamos
-  a usar, en nuestro caso será firestore() que indica que esa app es la que vamos a 
-  usar.
--Debemos instalar firebase-admin.
+-Lo que haremos ahora será obtener un devit según el id que pasaremos a la ruta del
+  endpoint, y así, traer datos no desde el cliente, sino desde el servidor.
+
+-Se puede tener rutas dinamicas tambien en los endpoints, de la misma manera que en
+  las pages.
+
+-Para obtener un parametro de la ruta, lo sacamos de la req de cada endpoint.
+
+-Para crear un endpoint, en un archivo de la api, exportamos una función, tendrá por
+  params la req y la response.
+
+Endpoint creado:
+  -Guardamos el Id que traemos de la ruta.
+  -Traemos la función exportada en el archivo admin.
+  -De ella vamos a usar los metodos:
+    .collection('nombre colección')
+    .doc('nombre_documento'): El documento con los datos, ahí será el id.
+    .get(): Para traer datos.
+  -Vemos que lo que estamos haciendo es similar a como traímos datos en el cliente, 
+    pero adaptado al servidor.
+  -Lo anterior nos devuelve una promesa, donde el valor será un documento, pero para
+    traer sus datos, ejecutamos el metodo data() de ese documento.
