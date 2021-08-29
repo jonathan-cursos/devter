@@ -1,43 +1,15 @@
-getInitialProps
+getServerSideProps
 
--En el getInitialProps sera una función del componente.
--Funciona de la misma manera sí el componente es una clase.
+-Esto se renderiza en el servidor en cada request.
+-Esto puede ser muy costoso, por lo que puede que al inicio veamos solo una página en 
+  blanco.
+-Esto no es optimo, pero a veces puede que sea lo más deseable.
+-En este caso igualmente, sucede solo en el servidor.
 
--Sí hacemos un log en este metodo, nos puede imprimir el mensaje o en la consola
-  o en el navegador:
-    .Cuando lo imprime en el servidor eso es porque la página se esta renderizando
-      aquí, y lo hará cuando ingresamos a la página que tiene el getInitialProps, y
-      recarguemos, porque el renderizado de está página se está haciendo en el 
-      servidor.
-    .Por el contrario, sí navegamos entre páginas e ingresamos a la página con el
-      getInitialProps, se imprimirá en el navegador, ya que lá app se renderizo 
-      previamente en server, pero está página se renderiza en el cliente, y no se 
-      puede volver a renderizar en el servidor.
-    .Aclarando esto, sí el mensaje se imprime en el navegador, la renderización es
-      en cliente, de lo contrario, en el servidor.
-
--Tiene un parametro context que contiene:
-  .El query con los parametros de la ruta.
-  .La request y response en caso de estár en el servidor.
-  .pathName: ruta actual.
-  .err: En caso de algún error.
-
--Sí hacemos fetching a un endpoint de la misma app, debemos colocar toda la ruta,
-  ya que en el punto de este getInitialProps no conoce los endpoints. A diferencia
-  cuando es en el cliente.
-
--En el proyecto se creo un hook useDateTimeFormat, ese lo creo un estudiante.
--Este tiene el problema que usa una API del navegador, y como se está usando al hacer
-  un render en el servidor, no podrá usar está API.
-
--Tambien, estámos añadiendo que en el endpoint creado en una clase anterior, se traíga
-  y responda el createdAt y el id, ya que los necesitamos y están manipulandose 
-  diferente.
-
--Lo que estamos haciendo al validar sí dentro del context tenemos res, es en caso de 
-  que la 1er validación no de respuesta, es decir, sí no traemos datos.
-    .Lo que hacemos es redirigir a la home para que no nos dé un error.
-    .Para esto colocamos: res.writeHead(301, { Location: '/ruta' }).end()
-    .El 301 es el error que estamos mandando.
-    .Indica que hubo respuesta del servidor, pero que el recurso solicitado se movio
-      a otra dirección permanentemente.
+Diferencias de uso con getInitialProps:
+  -Se exporta (no default) una función llamada getServerSideProps. Tendrá tambien el
+    context.
+  -Del context, ya no se sacamos query con los parametros, sino 'params'.
+  -Ahora, no devolvemos un objeto con los elementos que tendrá el componente como props,
+    sino devolvemos un objeto que tendrá un elemento props. Este es el que llevará
+    todas las props.
