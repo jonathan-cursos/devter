@@ -1,47 +1,14 @@
-getStaticProps
+getStaticProps - fallback
 
--Permite generar el fetching en tiempo de build de la página.
--Esto para crear páginas estaticas.
--En nuestra app no tiene utilidad.
+-Al tener el fallback en false, sí vamos a una ruta que no existe, esta nos manda a
+  la página 404.
+-Sí obviamente no tenemos datos antes de renderizar, dará error.
+-Sí lo pasamos a true, intentará randerizar con lo que tenga hasta ahora, y luego 
+  ejecutará en getStaticProps para obtener los datos.
 
--Requiere de una función llamada getStaticPaths, que indica cuales son los paths que 
-  tiene que generar.
--Esto se hace porque al generar una página estatica, crea los html de cada página.
--Entonces, suponiendo que tenemos una tienda de 40 productos, debería generar un html
-  para los 40 productos, entonces con este metodo indicamos cuales páginas nos tiene
-  que crear.
--La generación de los paths puede ser manual, indicando cuales son exactamente, o 
-  generandolas basados en datos traidos de una DB.
+-Esto nos sirve porque sí renderizamos algo (por ejemplo un loading) cuando no haya
+  props, no va a haber problema sí el parametro de la URL no está dentro de las
+  opciones de los paths. Sí no tenemos eso, nos dará error.
 
-Para usarlo:
-  -Cambiemos usamos igual el getStaticProps.
-  -Exportamos tambien la funcion getStaticPaths:
-    .Retornamos un objeto.
-    .Este tiene un array paths que contiene objetos.
-    .Cada objeto equivale a una ruta.
-    .Ahora, en este caso estamos manejando status/[id], el 'status' no se incluye en
-      nada, sino, lo que especificamos es el parametro.
-    .Para ello, dentro del objeto colocamos un elemento params que tambien será un obj
-      y colocamos como key el nombre del parametro (id), y como valor, el valor que
-      tendrá ese parametro en la ruta.
-    .Dentro del objeto que estamos retornando, colocamos tambien el elemento fallback
-      en false.
-    
--Hecho de esta manera, el metodo getStaticProps funcionará dentro del entorno de 
-  desarrollo, porque aquí corremos la API, pero, al hacer un build para generar la
-  página estatica, nos dará error, porque no tenemos el endpoint corriendo.
--En ese caso, una solucion es traer el procedimiento de traer los datos directamente
-  en esta función, y no en un endpoint.
--Tambien da error, porque antes usamos context.res para casos donde haya error, pero
-  ahora no corre en un server, por lo que res no existe.
--Para casos de error, estará el error en la traída de datos, donde el objeto props 
-  estaría vacío sí hubo error.
-
--Al correr el build nos generará exactamente la página que colocamos con los datos
-  exactos que colocamos.
--Esto hace la página más ligera por ser estatica, pero con el problema de solo crear
-  una especificamente para ese parametro.
--A nosotros nos dío problemas con el createAdd.
-
--Para ir a la página generada (status/[id]):
-  .next > server > pages > status (nombre de pagina) > [id].html
+-Esto lo que hará será que sí estamos en producción, nos generá el archivo estatico,
+  y al recargar no veríamos el loading.
