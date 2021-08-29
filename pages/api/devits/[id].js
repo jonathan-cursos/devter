@@ -10,7 +10,14 @@ export default (req, res) => {
     .get()
     .then((doc) => {
       const data = doc.data()
-      res.json(data)
+      const id = doc.id
+      const { createAdd } = data
+
+      res.json({
+        ...data,
+        id,
+        createdAt: +createAdd.toDate()
+      })
     })
     .catch(() => {
       res.status(400).end()
