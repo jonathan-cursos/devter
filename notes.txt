@@ -1,19 +1,22 @@
-Componente desmontado al actualizar estado
+Mejoras progresivas
 
--Si realizamos una prueba de lo anterior en otra pestaña, funcionará, pero
-  tendremos un warning de estado desmontado.
--Esto sucede, porque a la hora de ejecutar el callback para actualizar el estado,
-  el componente no está montado en pantalla, ya que el que esta montado en pantalla
-  es en el que se escribe el devit.
+-Filosofía de diseño web que los desarrolladores aplican, o deberían aplicar.
+-Esto indica que, para las personas que naveguen en un equipo más potente, o con
+  navegadores más actualizados, dotarlos de una mejor experiencia que los que
+  tienen navegadores desactualizados, aunque estos podrán seguir tenniendo 
+  algunas funcionalidades báse definidas.
 
--Esto sucede igual cuando estamos haciendo algun fetch, cuyos datos cambien el 
-  estado de un componente, pero sí ese fetch duró mucho, y el componente se 
-  desmonta, dará ese error.
+-En nuestro caso, no hicimos ningun cambio al proyecto como tal, sino, como ejemplo,
+  al hook useDateTimeFormat (este no lo hicimos nosotros, asi que no esta haciendo
+  nada).
 
--Esto que sucede de cambiar el estado se llama suscripción, y debemos limpiarla
-  para evitar este error.
+-Lo que estamos haciendo es validar sí soporta la API 'Intl' del navegador, en
+  caso de que sí, la usará para realizar sus procesos, en caso de que no, 
+  usa otra que haga algo parecido pero que sea más soportada.
 
--Para limpiarla, la función que está suscribiendo la guardamos una constante,
-  y en el useEffect retornamos una función que retorne la ejecución de esa 
-  constante.
-    .En nuestro caso, estamos validando primero sí esa constante tiene valor.
+-Para validar que está sea soportada en los navegadores, validamos que el tipo
+  de 'Intl' sea distinto de 'undefined', y que haya un valor en 
+  Intl.useDateTimeFormat.
+
+-En este caso, en lugar de Intl, si no esta soportada, usamos la API 
+  Date.toLocaleDateString().
