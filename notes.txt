@@ -1,13 +1,19 @@
-Actualizacion de firebase en tiempo real
+Componente desmontado al actualizar estado
 
--Sí vemos el archivo client de firebase, creamos la función listenLatest, que es
-  similar a fetch latest, pero con un cambio.
--Fetch se suele usar para cuando hacemos algo solo una vez, mientras que listen es
-  para que se ejecute algo cuando hubo algún cambio.
--En el caso de listen, estamos obteniendo los documentos, y al tenerlos, estamos
-  pasandoselos por parametro a una función callback.
--Esto significa que, en el componente que estamos llamando a los devits ahora
-  usaremos listen.
--Al usarlo, pasaremos una función por parametro, esta tiene por parametro los 
-  devits.
--Los cuales, colocaremos en el estado.
+-Si realizamos una prueba de lo anterior en otra pestaña, funcionará, pero
+  tendremos un warning de estado desmontado.
+-Esto sucede, porque a la hora de ejecutar el callback para actualizar el estado,
+  el componente no está montado en pantalla, ya que el que esta montado en pantalla
+  es en el que se escribe el devit.
+
+-Esto sucede igual cuando estamos haciendo algun fetch, cuyos datos cambien el 
+  estado de un componente, pero sí ese fetch duró mucho, y el componente se 
+  desmonta, dará ese error.
+
+-Esto que sucede de cambiar el estado se llama suscripción, y debemos limpiarla
+  para evitar este error.
+
+-Para limpiarla, la función que está suscribiendo la guardamos una constante,
+  y en el useEffect retornamos una función que retorne la ejecución de esa 
+  constante.
+    .En nuestro caso, estamos validando primero sí esa constante tiene valor.

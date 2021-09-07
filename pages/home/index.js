@@ -14,12 +14,14 @@ export default function HomePage() {
   const user = useUser()
 
   useEffect(() => {
+    let unsuscribe
     if (user) {
-      listenLatestDevits((newDevits) => {
+      unsuscribe = listenLatestDevits((newDevits) => {
         console.log(newDevits)
         setTimeLine(newDevits)
       })
     }
+    return () => unsuscribe && unsuscribe()
     // user && fetchLatestDevits().then(setTimeLine)
   }, [user])
 
