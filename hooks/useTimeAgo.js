@@ -1,4 +1,8 @@
 import { useEffect, useState } from 'react'
+import { formatDate } from './useDateTimeFormat'
+
+const isRelativeTimeFormatSupported =
+  typeof Intl !== 'undefined' && Intl.RelativeTimeFormat
 
 const DATE_UNITS = [
   // A cuanto equivale cada unidad en segundos
@@ -24,12 +28,18 @@ export default function useTimeAge(timestamp) {
   const [timeAgo, setTimeAgo] = useState(() => getDateDiffs(timestamp))
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const newTimeAgo = getDateDiffs(timestamp)
-      setTimeAgo(newTimeAgo)
-    }, 5000)
-    return () => clearInterval(interval)
+    if (isRelativeTimeFormatSupported) {
+      const interval = setInterval(() => {
+        const newTimeAgo = getDateDiffs(timestamp)
+        setTimeAgo(newTimeAgo)
+      }, 5000)
+      return () => clearInterval(interval)
+    }
   }, [timestamp])
+
+  if (!isRelativeTimeFormatSupported) {
+    return formatDate(timestamp)
+  }
 
   const rtf = new Intl.RelativeTimeFormat('es', {
     style: 'short'

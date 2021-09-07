@@ -1,22 +1,9 @@
-Mejoras progresivas
+Mejoras progresivas en useTimeAgo
 
--Filosofía de diseño web que los desarrolladores aplican, o deberían aplicar.
--Esto indica que, para las personas que naveguen en un equipo más potente, o con
-  navegadores más actualizados, dotarlos de una mejor experiencia que los que
-  tienen navegadores desactualizados, aunque estos podrán seguir tenniendo 
-  algunas funcionalidades báse definidas.
-
--En nuestro caso, no hicimos ningun cambio al proyecto como tal, sino, como ejemplo,
-  al hook useDateTimeFormat (este no lo hicimos nosotros, asi que no esta haciendo
-  nada).
-
--Lo que estamos haciendo es validar sí soporta la API 'Intl' del navegador, en
-  caso de que sí, la usará para realizar sus procesos, en caso de que no, 
-  usa otra que haga algo parecido pero que sea más soportada.
-
--Para validar que está sea soportada en los navegadores, validamos que el tipo
-  de 'Intl' sea distinto de 'undefined', y que haya un valor en 
-  Intl.useDateTimeFormat.
-
--En este caso, en lugar de Intl, si no esta soportada, usamos la API 
-  Date.toLocaleDateString().
+-En el caso del useTimeAgo estamos haciendo algo similar, pero con el 
+  'Intl.RelativeTimeFormat'.
+-En donde ejecutamos el effect solo sí es compatible, y en caso de no serlo,
+  usamos la función formatDate del hook anterior explicado, donde le pasaremos
+  por parametro el timestamp.
+-Un cambio en esta función formatDate, es que el parametro {languaje} debe estar
+  por defecto con un objeto vacío como valor.
