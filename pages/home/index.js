@@ -1,5 +1,5 @@
 import Devit from 'components/Devit'
-import { fetchLatestDevits } from 'firebase/client'
+import { listenLatestDevits } from 'firebase/client'
 import useUser from 'hooks/useUser'
 import { useEffect, useState } from 'react'
 import Create from 'components/Icons/Create'
@@ -14,8 +14,15 @@ export default function HomePage() {
   const user = useUser()
 
   useEffect(() => {
-    user && fetchLatestDevits().then(setTimeLine)
+    if (user) {
+      listenLatestDevits((newDevits) => {
+        console.log(newDevits)
+        setTimeLine(newDevits)
+      })
+    }
+    // user && fetchLatestDevits().then(setTimeLine)
   }, [user])
+
   return (
     <>
       <Head>

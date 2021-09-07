@@ -1,14 +1,13 @@
-getStaticProps - fallback
+Actualizacion de firebase en tiempo real
 
--Al tener el fallback en false, sí vamos a una ruta que no existe, esta nos manda a
-  la página 404.
--Sí obviamente no tenemos datos antes de renderizar, dará error.
--Sí lo pasamos a true, intentará randerizar con lo que tenga hasta ahora, y luego 
-  ejecutará en getStaticProps para obtener los datos.
-
--Esto nos sirve porque sí renderizamos algo (por ejemplo un loading) cuando no haya
-  props, no va a haber problema sí el parametro de la URL no está dentro de las
-  opciones de los paths. Sí no tenemos eso, nos dará error.
-
--Esto lo que hará será que sí estamos en producción, nos generá el archivo estatico,
-  y al recargar no veríamos el loading.
+-Sí vemos el archivo client de firebase, creamos la función listenLatest, que es
+  similar a fetch latest, pero con un cambio.
+-Fetch se suele usar para cuando hacemos algo solo una vez, mientras que listen es
+  para que se ejecute algo cuando hubo algún cambio.
+-En el caso de listen, estamos obteniendo los documentos, y al tenerlos, estamos
+  pasandoselos por parametro a una función callback.
+-Esto significa que, en el componente que estamos llamando a los devits ahora
+  usaremos listen.
+-Al usarlo, pasaremos una función por parametro, esta tiene por parametro los 
+  devits.
+-Los cuales, colocaremos en el estado.
