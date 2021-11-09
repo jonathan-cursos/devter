@@ -1,9 +1,27 @@
-Mejoras progresivas en useTimeAgo
+Variables de entorno
 
--En el caso del useTimeAgo estamos haciendo algo similar, pero con el 
-  'Intl.RelativeTimeFormat'.
--En donde ejecutamos el effect solo sí es compatible, y en caso de no serlo,
-  usamos la función formatDate del hook anterior explicado, donde le pasaremos
-  por parametro el timestamp.
--Un cambio en esta función formatDate, es que el parametro {languaje} debe estar
-  por defecto con un objeto vacío como valor.
+-La idea con las variables de entorno es que, dependiendo del entorno en el que
+  estemos (desarrollo, producción, etc) usemos unas variables u otras, para
+  que ataquemos una DB distinta dependiendo del entorno, por ejemplo.
+-Tambien para usar unas credenciales u otras.
+
+-Next ya viene configurado para el uso de variables de entorno.
+-Sencillamente creamos los archivos .env en la raíz del proyecto.
+-De esta forma ya podemos usar variables de entorno en los archivos.
+-Hay diferentes tipos de .env:
+  .env: General.
+  .env.development: Especificamente para desarrollo.
+  .env.production: Especificamente para producción.
+  .En estos colocaremos variables que no importa que se suban al repositorio, como
+    links de apis o similar.
+-Sin embargo, hay un .env que no debemos subir al repositorio, y tendrá las variables
+  con credenciales que nadie debe ver: ".env.local".
+
+-Al crear un .env debemos reiniciar el server para que funcione.
+
+-Las variables dentro de los .env, por defecto, están disponibles solo en el server,
+  pero hay una forma de hacerlas disponibles en el cliente, y es colocando al 
+  inicio del nombre de la variable "NEXT_PUBLIC_" ahí sí continua el nombre de la
+  variable.
+-Al acceder a la variable, debemos colocar el nombre completo.
+-No se debe hacer con variables del .env.local, porque es contradictorio.
